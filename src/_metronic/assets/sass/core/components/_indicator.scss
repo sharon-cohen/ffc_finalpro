@@ -1,0 +1,13 @@
+//
+// Indicator
+//
+
+.indicator-progress {
+  display: inline-block;
+}
+
+.indicator-label {
+  [data-kt-indicator="on"] > & {
+    display: none;
+  }
+}
