@@ -1,0 +1,112 @@
+5/28/2022 6:27:53 PMINFO [SN] INIT Game Is Started
+5/28/2022 6:27:50 PMBlockId: Platform_3(Clone)_3
+5/28/2022 6:28:54 PMBlockId: Platform_1
+5/28/2022 6:28:55 PMBlockId: Platform_1
+5/28/2022 6:28:56 PMINFO [SN] RUNNING Jump distance: 0.8747253
+5/28/2022 6:28:56 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:28:56 PMBlockId: Platform_2
+5/28/2022 6:28:57 PMBlockId: Platform_2
+5/28/2022 6:28:58 PMINFO [SN] RUNNING Jump distance: 0.7848368
+5/28/2022 6:28:58 PMBlockId: Platform_3(Clone)_3
+5/28/2022 6:28:59 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:28:59 PMBlockId: Platform_3(Clone)_3
+5/28/2022 6:29:00 PMINFO [SN] RUNNING Jump distance: 12.13702
+5/28/2022 6:29:00 PMBlockId: Platform_3(Clone)_3
+5/28/2022 6:29:01 PMINFO [SN] RUNNING Jump distance: 6.43293
+5/28/2022 6:29:01 PMBlockId: Platform_3(Clone)_3
+5/28/2022 6:29:02 PMINFO [SN] RUNNING Jump distance: 0.8147202
+5/28/2022 6:29:02 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:03 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:03 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:04 PMINFO [SN] RUNNING Jump distance: 8.928627
+5/28/2022 6:29:04 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:05 PMINFO [SN] RUNNING Jump distance: 2.645546
+5/28/2022 6:29:06 PMINFO [SN] RUNNING ResultJump: FAIL
+5/28/2022 6:29:05 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:09 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:10 PMINFO [SN] RUNNING Jump distance: 11.37878
+5/28/2022 6:29:10 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:11 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:12 PMINFO [SN] RUNNING Jump distance: -0.3288803
+5/28/2022 6:29:13 PMINFO [SN] RUNNING ResultJump: FAIL
+5/28/2022 6:29:12 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:16 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:17 PMBlockId: Platform_18(Clone)_4
+5/28/2022 6:29:18 PMINFO [SN] RUNNING Jump distance: 0.5142899
+5/28/2022 6:29:18 PMBlockId: Platform_2(Clone)_5
+5/28/2022 6:29:19 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:19 PMBlockId: Platform_2(Clone)_5
+5/28/2022 6:29:20 PMBlockId: Platform_2(Clone)_5
+5/28/2022 6:29:21 PMINFO [SN] RUNNING Jump distance: 0.8095703
+5/28/2022 6:29:21 PMBlockId: Platform_6(Clone)_6
+5/28/2022 6:29:22 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:22 PMBlockId: Platform_6(Clone)_6
+5/28/2022 6:29:23 PMBlockId: Platform_6(Clone)_6
+5/28/2022 6:29:24 PMBlockId: Platform_6(Clone)_6
+5/28/2022 6:29:25 PMINFO [SN] RUNNING Jump distance: 0.781456
+5/28/2022 6:29:25 PMBlockId: Platform_16(Clone)_7
+5/28/2022 6:29:26 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:26 PMINFO [SN] RUNNING Jump distance: -0.4034729
+5/28/2022 6:29:26 PMBlockId: Platform_11(Clone)_8
+5/28/2022 6:29:27 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:27 PMBlockId: Platform_11(Clone)_8
+5/28/2022 6:29:28 PMBlockId: Platform_11(Clone)_8
+5/28/2022 6:29:29 PMINFO [SN] RUNNING Jump distance: 0.5986099
+5/28/2022 6:29:29 PMBlockId: Platform_14(Clone)_9
+5/28/2022 6:29:30 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:30 PMBlockId: Platform_14(Clone)_9
+5/28/2022 6:29:31 PMINFO [SN] RUNNING Jump distance: 6.198479
+5/28/2022 6:29:31 PMBlockId: Platform_14(Clone)_9
+5/28/2022 6:29:32 PMINFO [SN] RUNNING ResultJump: FAIL
+5/28/2022 6:29:32 PMBlockId: Platform_14(Clone)_9
+5/28/2022 6:29:36 PMBlockId: Platform_14(Clone)_9
+5/28/2022 6:29:37 PMBlockId: Platform_14(Clone)_9
+5/28/2022 6:29:38 PMINFO [SN] RUNNING Jump distance: 0.2742996
+5/28/2022 6:29:38 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:38 PMBlockId: Platform_7(Clone)_10
+5/28/2022 6:29:39 PMINFO [SN] RUNNING Jump distance: -0.2408752
+5/28/2022 6:29:39 PMBlockId: Platform_12(Clone)_11
+5/28/2022 6:29:40 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:40 PMBlockId: Platform_12(Clone)_11
+5/28/2022 6:29:41 PMBlockId: Platform_12(Clone)_11
+5/28/2022 6:29:42 PMBlockId: Platform_12(Clone)_11
+5/28/2022 6:29:43 PMINFO [SN] RUNNING Jump distance: 0.6000671
+5/28/2022 6:29:43 PMBlockId: Platform_1(Clone)_12
+5/28/2022 6:29:44 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:44 PMBlockId: Platform_1(Clone)_12
+5/28/2022 6:29:45 PMINFO [SN] RUNNING Jump distance: 1.352615
+5/28/2022 6:29:45 PMBlockId: Platform_13(Clone)_13
+5/28/2022 6:29:46 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:46 PMINFO [SN] RUNNING Jump distance: 1.013779
+5/28/2022 6:29:46 PMBlockId: Platform_4(Clone)_14
+5/28/2022 6:29:47 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:47 PMBlockId: Platform_4(Clone)_14
+5/28/2022 6:29:48 PMINFO [SN] RUNNING Jump distance: 0.6547546
+5/28/2022 6:29:48 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:48 PMBlockId: Platform_8(Clone)_15
+5/28/2022 6:29:49 PMBlockId: Platform_8(Clone)_15
+5/28/2022 6:29:50 PMINFO [SN] RUNNING Jump distance: 0.8472748
+5/28/2022 6:29:50 PMBlockId: Platform_15(Clone)_16
+5/28/2022 6:29:51 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:51 PMINFO [SN] RUNNING Jump distance: 16.02469
+5/28/2022 6:29:51 PMBlockId: Platform_15(Clone)_16
+5/28/2022 6:29:52 PMBlockId: Platform_15(Clone)_16
+5/28/2022 6:29:53 PMBlockId: Platform_15(Clone)_16
+5/28/2022 6:29:54 PMINFO [SN] RUNNING Jump distance: 0.2399292
+5/28/2022 6:29:54 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:54 PMBlockId: Platform_5(Clone)_17
+5/28/2022 6:29:55 PMINFO [SN] RUNNING Jump distance: 6.671753
+5/28/2022 6:29:55 PMBlockId: Platform_5(Clone)_17
+5/28/2022 6:29:56 PMINFO [SN] RUNNING Jump distance: 0.619873
+5/28/2022 6:29:56 PMBlockId: Platform_9(Clone)_18
+5/28/2022 6:29:58 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:29:58 PMBlockId: Platform_9(Clone)_18
+5/28/2022 6:29:59 PMBlockId: Platform_9(Clone)_18
+5/28/2022 6:30:00 PMINFO [SN] RUNNING Jump distance: 0.7128754
+5/28/2022 6:30:00 PMBlockId: Platform_17(Clone)_19
+5/28/2022 6:30:01 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 6:30:01 PMBlockId: Platform_17(Clone)_19
+5/28/2022 6:30:02 PMINFO [SN] RUNNING Jump distance: 0.875824
+5/28/2022 6:30:02 PMBlockId: Platform_10(Clone)_20
+5/28/2022 6:30:03 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/

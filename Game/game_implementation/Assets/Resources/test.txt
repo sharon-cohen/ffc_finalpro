@@ -1,0 +1,20 @@
+5/28/2022 3:15:25 PMINFO [SN] INIT Game Is Started
+5/28/2022 3:15:25 PMBlockId: Platform_1
+5/28/2022 3:21:03 PMBlockId: Platform_1
+5/28/2022 3:21:04 PMBlockId: Platform_1
+5/28/2022 3:21:05 PMINFO [SN] RUNNING Jump distance: -0.4880371
+5/28/2022 3:21:05 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 3:21:05 PMBlockId: Platform_2
+5/28/2022 3:21:06 PMBlockId: Platform_2
+5/28/2022 3:21:07 PMINFO [SN] RUNNING Jump distance: 1.151811
+5/28/2022 3:21:07 PMBlockId: Platform_2(Clone)_3
+5/28/2022 3:21:08 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 3:21:08 PMBlockId: Platform_2(Clone)_3
+5/28/2022 3:21:09 PMBlockId: Platform_2(Clone)_3
+5/28/2022 3:21:10 PMINFO [SN] RUNNING Jump distance: 1.148561
+5/28/2022 3:21:10 PMBlockId: Platform_9(Clone)_4
+5/28/2022 3:21:11 PMINFO [SN] RUNNING ResultJump: SUCCESS
+5/28/2022 3:21:11 PMBlockId: Platform_9(Clone)_4
+5/28/2022 3:21:12 PMBlockId: Platform_9(Clone)_4
+5/28/2022 3:21:13 PMINFO [SN] RUNNING Jump distance: 4.754868
+5/28/2022 3:21:13 PMBlockId: Platfor
