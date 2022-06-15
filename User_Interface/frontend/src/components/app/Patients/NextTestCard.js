@@ -11,10 +11,21 @@ const NextTestCard = () => {
   const { id } = JSON.parse(localStorage.getItem("user"));
   const { data, isLoading, isError, refetch } = useQuery(
     ["patientTests", id],
-    () => getPatientTests(id)
+    () => getPatientTests(id),
+    {
+      select: (d) => ({
+        ...d,
+        tests: d?.tests.sort((a, b) => {
+          return parseInt(a.date) - parseInt(b.date);
+        }),
+      }),
+    }
   );
   const { tests = [] } = data || {};
-  const latestTest = tests[0];
+  const sortedTests = [...tests].filter((a) => {
+    return a.status !== 'problem' && a.status !== 'done'
+  });
+  const latestTest = sortedTests[0];
   const { testName, code, foodGuide, date } = latestTest || {};
   const onStartTest = async (testId, patientId) => {
     const { isConfirmed } = await StartTestSwal.fire({
@@ -41,7 +52,6 @@ const NextTestCard = () => {
       await refetch();
     }
   };
-  console.log(date);
   return (
     <div className="card bg-dark h-100 ">
       <div className="card-body text-white">

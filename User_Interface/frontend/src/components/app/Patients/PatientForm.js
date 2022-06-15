@@ -5,6 +5,7 @@ import Select from "../../core/form/select/Select";
 import classNames from "classnames";
 import { createPatient } from "../../../api/patients-api";
 import { useMutation, useQueryClient } from "react-query";
+import DatePicker from "../../core/form/date-picker/DatePicker";
 
 const PatientForm = ({ setIsPatientModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +46,11 @@ const PatientForm = ({ setIsPatientModalOpen }) => {
             required: "Email is required",
           }}
         />
+        <div className='m'>
+        <label className="form-label mb-3">Date of birth</label>
+        <DatePicker name='dateOfBirth'  />
+
+        </div>
         <Select
           name="gender"
           label="Gender"
@@ -60,14 +66,6 @@ const PatientForm = ({ setIsPatientModalOpen }) => {
           type="text"
           rules={{
             required: "ID is required",
-          }}
-        />
-        <Input
-          name="dateOfBirth"
-          label="Age"
-          type="text"
-          rules={{
-            required: "Allergies is required",
           }}
         />
         <Input
@@ -101,15 +99,12 @@ const PatientForm = ({ setIsPatientModalOpen }) => {
           rules={{
             required: "Allergies is required",
           }}
-        />
-          <Input
-          name="isADHD"
-          label="is ADHD?"
-          type="text"
-          rules={{
-            required: "isADHD is required",
-          }}
-        />
+        /> 
+        <Select 
+        rules={{required: "ISADHD is required"}}
+        options={[{value: true, label: "Does have ADHD"}, { value: false, label: "Does not have ADHD"}]}
+         name='isADHD'
+         />
         <Input
           name="additionalInformation"
           label="Additional Information"
