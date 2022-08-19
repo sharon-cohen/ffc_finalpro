@@ -67,7 +67,9 @@ const PatientTests = ({ selectedPatient, getAll = false }) => {
     await refetch();
   };
   useEffect(() => {
-    refetch();
+    if (_id || getAll) {
+      refetch();
+    }
   }, [isTestModalOpen]);
   return (
     <div className="card  bg-dark h-100 text-white">

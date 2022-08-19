@@ -13,96 +13,96 @@ import pic8 from './8.jpg';
 function Results() {
   const { state } = useLocation();
   const [sensorLogSec, setsensorLogSec] = useState([]);
-  useEffect(() => {
-    const firstRowSensorLog = state.sensorLog[0]
-    const lestRowSensorLog = state.sensorLog[state.sensorLog.length-1]
-    console.log(firstRowSensorLog);   
-    console.log(lestRowSensorLog);   
-    const firtTime = firstRowSensorLog.split(" ")[1];
-    const lestTime = lestRowSensorLog.split(" ")[1];
-    const firtTimeSec = parseInt(firtTime.split(":")[2]);
-    const lestTimeSec = parseInt(lestTime.split(":")[2]);
-    const firtTimeMin = parseInt(firtTime.split(":")[1]);
-    const lestTimeMin = parseInt(lestTime.split(":")[1]);
-    const totalFirstSec = firtTimeMin * 60 +firtTimeSec
-    const totalLasttSec = lestTimeMin * 60 +lestTimeSec
-    const totalGameTimeSec = totalLasttSec -totalFirstSec
-    let map1 = new Map();
-    let map1TimePlatform = new Map();
-    let map1TimeResultJump = new Map();
-    let platformSequnce = []
+  // useEffect(() => {
+  //   const firstRowSensorLog = state.sensorLog[0]
+  //   const lestRowSensorLog = state.sensorLog[state.sensorLog.length-1]
+  //   console.log(firstRowSensorLog);   
+  //   console.log(lestRowSensorLog);   
+  //   const firtTime = firstRowSensorLog.split(" ")[1];
+  //   const lestTime = lestRowSensorLog.split(" ")[1];
+  //   const firtTimeSec = parseInt(firtTime.split(":")[2]);
+  //   const lestTimeSec = parseInt(lestTime.split(":")[2]);
+  //   const firtTimeMin = parseInt(firtTime.split(":")[1]);
+  //   const lestTimeMin = parseInt(lestTime.split(":")[1]);
+  //   const totalFirstSec = firtTimeMin * 60 +firtTimeSec
+  //   const totalLasttSec = lestTimeMin * 60 +lestTimeSec
+  //   const totalGameTimeSec = totalLasttSec -totalFirstSec
+  //   let map1 = new Map();
+  //   let map1TimePlatform = new Map();
+  //   let map1TimeResultJump = new Map();
+  //   let platformSequnce = []
     
-    for(let i = 0; i < state.gameLog.length; i++){
-        console.log(state.gameLog[i])
-      if (state.gameLog[i].includes("Platform")){
-          if (!platformSequnce.includes(state.gameLog[i].split(" ")[3]))  
-                platformSequnce.push(state.gameLog[i].split(" ")[3])
-        let time = state.gameLog[i].split(" ")[1];  
-        if (!map1TimePlatform.has(time)){
-          map1TimePlatform.set(time,state.gameLog[i].split(" ")[3])
-      }
+  //   for(let i = 0; i < state.gameLog.length; i++){
+  //       console.log(state.gameLog[i])
+  //     if (state.gameLog[i].includes("Platform")){
+  //         if (!platformSequnce.includes(state.gameLog[i].split(" ")[3]))  
+  //               platformSequnce.push(state.gameLog[i].split(" ")[3])
+  //       let time = state.gameLog[i].split(" ")[1];  
+  //       if (!map1TimePlatform.has(time)){
+  //         map1TimePlatform.set(time,state.gameLog[i].split(" ")[3])
+  //     }
       
-    }
-    if (state.gameLog[i].includes("SUCCESS") || state.gameLog[i].includes("FAIL") ){
-      let time = state.gameLog[i].split(" ")[1];  
-      if (!map1TimeResultJump.has(time)){
-        map1TimeResultJump.set(time,state.gameLog[i].split(" ")[6])
-      }
-    }
-    }
+  //   }
+  //   if (state.gameLog[i].includes("SUCCESS") || state.gameLog[i].includes("FAIL") ){
+  //     let time = state.gameLog[i].split(" ")[1];  
+  //     if (!map1TimeResultJump.has(time)){
+  //       map1TimeResultJump.set(time,state.gameLog[i].split(" ")[6])
+  //     }
+  //   }
+  //   }
     
    
-    for(let i = 0; i <= totalGameTimeSec; i++){
-      map1.set(i,"")
-    }
-    for(let i = 0; i < state.sensorLog.length; i++){
-      let sensorLogSplit = state.sensorLog[i].split(" ");
-      let time = sensorLogSplit[1];
-      let timeSplite = time.split(":");
-      let sec = parseInt(timeSplite[2])
-      let min = parseInt(timeSplite[1])
-      const totaltime = min * 60 + sec
-      const finalTime = totaltime - totalFirstSec
+  //   for(let i = 0; i <= totalGameTimeSec; i++){
+  //     map1.set(i,"")
+  //   }
+  //   for(let i = 0; i < state.sensorLog.length; i++){
+  //     let sensorLogSplit = state.sensorLog[i].split(" ");
+  //     let time = sensorLogSplit[1];
+  //     let timeSplite = time.split(":");
+  //     let sec = parseInt(timeSplite[2])
+  //     let min = parseInt(timeSplite[1])
+  //     const totaltime = min * 60 + sec
+  //     const finalTime = totaltime - totalFirstSec
       
-      if (map1TimePlatform.has(time) && map1TimeResultJump.has(time))
-        map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":map1TimePlatform.get(time),"resultJump":map1TimeResultJump.get(time)}) 
-      if (!map1TimePlatform.has(time) && map1TimeResultJump.has(time))
-        map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":"none","resultJump":map1TimeResultJump.get(time)}) 
-      if (map1TimePlatform.has(time) && !map1TimeResultJump.has(time))
-        map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":map1TimePlatform.get(time),"resultJump":"none"}) 
-      if (!map1TimePlatform.has(time) && !map1TimeResultJump.has(time))
-        map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":"none","resultJump":"none"}) 
-    }
+  //     if (map1TimePlatform.has(time) && map1TimeResultJump.has(time))
+  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":map1TimePlatform.get(time),"resultJump":map1TimeResultJump.get(time)}) 
+  //     if (!map1TimePlatform.has(time) && map1TimeResultJump.has(time))
+  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":"none","resultJump":map1TimeResultJump.get(time)}) 
+  //     if (map1TimePlatform.has(time) && !map1TimeResultJump.has(time))
+  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":map1TimePlatform.get(time),"resultJump":"none"}) 
+  //     if (!map1TimePlatform.has(time) && !map1TimeResultJump.has(time))
+  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":"none","resultJump":"none"}) 
+  //   }
    
-   // fix secsses
-   for (var [key, value] of map1.entries()) {
+  //  // fix secsses
+  //  for (var [key, value] of map1.entries()) {
     
-    if (value["resultJump"] == "SUCCESS" && value["platform"] != "none"){
-        const platform =  value["platform"]
-        console.log(platform)
-        // console.log(platformSequnce)
-        const index = platformSequnce.indexOf(platform)
-        const theRealPlatyform = platformSequnce[index-1]
-        let theKey = 0
-        for (var [key1, value1] of map1.entries()){
-            if (value1["platform"] == theRealPlatyform){
-                theKey = key1
-            }
-        }
-          let valueChnage = map1.get(theKey)
-          valueChnage["resultJump"] = "SUCCESS"
-          map1.set(theKey,valueChnage)
-          let deleteRes = map1.get(key)
-          deleteRes["resultJump"] = "none"
-     }
+  //   if (value["resultJump"] == "SUCCESS" && value["platform"] != "none"){
+  //       const platform =  value["platform"]
+  //       console.log(platform)
+  //       // console.log(platformSequnce)
+  //       const index = platformSequnce.indexOf(platform)
+  //       const theRealPlatyform = platformSequnce[index-1]
+  //       let theKey = 0
+  //       for (var [key1, value1] of map1.entries()){
+  //           if (value1["platform"] == theRealPlatyform){
+  //               theKey = key1
+  //           }
+  //       }
+  //         let valueChnage = map1.get(theKey)
+  //         valueChnage["resultJump"] = "SUCCESS"
+  //         map1.set(theKey,valueChnage)
+  //         let deleteRes = map1.get(key)
+  //         deleteRes["resultJump"] = "none"
+  //    }
    
-    }
-    console.log(map1);   
+  //   }
+  //   console.log(map1);   
  
     
 
     
-  });
+  // });
 
   console.log(state, "THIS_IS_THE_PROJECT");
   return (

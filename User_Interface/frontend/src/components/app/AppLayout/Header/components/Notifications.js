@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useQuery } from "react-query";
 import { getNotifications } from "../../../../../api/notifications";
 
-export const socket = io("https://github.com/sharon-cohen/ffc_finalpro.git");
+export const socket = io("https://foodforconcentration.herokuapp.com/");
 
 const testEV = ["create", "update", "delete", "confirm"];
 

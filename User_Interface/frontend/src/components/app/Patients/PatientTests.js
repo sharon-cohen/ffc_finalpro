@@ -67,7 +67,9 @@ const PatientTests = ({ selectedPatient, getAll = false }) => {
     await refetch();
   };
   useEffect(() => {
-    refetch();
+    if (_id || getAll) {
+      refetch();
+    }
   }, [isTestModalOpen]);
   return (
     <div className="card  bg-dark h-100 text-white">
@@ -94,11 +96,13 @@ const PatientTests = ({ selectedPatient, getAll = false }) => {
               }
                 btn btn-outline btn-outline-dashed me-2 btn-sm"
               `}
-                onClick={() =>
-                  toggleTreatmentStatus(
-                    treatment._id,
-                    treatment?.status === "hold" ? "in progress" : "hold"
+                onClick={async () => {
+                  await toggleTreatmentStatus(
+                      treatment._id,
+                      treatment?.status === "hold" ? "in progress" : "hold"
                   )
+                  refetch()
+                }
                 }
               >
                 {treatment?.status === "hold" ? "Resume" : "Hold"}
