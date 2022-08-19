@@ -21,18 +21,19 @@ public class SC_timer : MonoBehaviour
     private void Start()
     {
         init();
-      
+
     }
-    void init() {
+    void init()
+    {
         timerIsRunning = false;
         timeRemaining = 3f;
-        timeText.text = "";
+        //timeText.text = "";
 
 
     }
     void Update()
     {
-       
+
         if (SC_State.Instance.getState() != SC_State.GM_STATE.END)
         {
             if (timerIsRunning)
@@ -50,8 +51,9 @@ public class SC_timer : MonoBehaviour
             }
         }
     }
-    public void active() {
-        
+    public void active()
+    {
+
         if (SC_State.Instance.getState() == SC_State.GM_STATE.END)
         {
             timeText.text = "The session is over - The game will close automatically after the data is uploaded";

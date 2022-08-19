@@ -34,14 +34,15 @@ public class SC_DLL : MonoBehaviour
        
     }
     public void dll_start() {
-        TryAgain = GameObject.Find("btn_tryConnection");
-        Debug.Log("disable button ");
-        activeTheScript = true;
-        TryAgain.SetActive(false);
-        SC_State.Instance.setStateSn(SC_State.SN_STATE.START_CONNECT_SENSOR);
+        //TryAgain = GameObject.Find("btn_tryConnection");
+        //Debug.Log("disable button ");
+        //activeTheScript = true;
+        //TryAgain.SetActive(false);
+        //SC_State.Instance.setStateSn(SC_State.SN_STATE.START_CONNECT_SENSOR);
     }
     void Update()
     {
+        
         if (activeTheScript == true) {
             if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.FAIL_CONNECT_SENSOR) {
                 TryAgain.SetActive(true);
@@ -65,11 +66,7 @@ public class SC_DLL : MonoBehaviour
     }
     // What the child thread is responsible for 
 
-    public void btn_tryConnectionDLL()
-    {
-        SC_State.Instance.setStateSn(SC_State.SN_STATE.START_CONNECT_SENSOR);
-        TryAgain.SetActive(false);
-    }
+   
     public void disconnect_sensor() {
          SC_sensor.Instance.disconnect_sensor();
 

@@ -15,6 +15,8 @@ public class SC_gameControl : MonoBehaviour
     private GameObject connectedPage_btnTryAgin;
     private GameObject connectedPage_txtStatusConnection;
 
+    GameObject TryAgain_connect_sensor;
+
     private GameObject txt_btn_submit_or_startGame;
     private GameObject InputField_codeTest;
     private GameObject txt_status_input_code;
@@ -25,11 +27,18 @@ public class SC_gameControl : MonoBehaviour
 
     // Game Over message
     private GameObject CanvaGameOver;
+    private GameObject CanvaSensorConnection;
+    private GameObject txt_wait_sensor_connection;
     public int score = 0;
     private GameObject theCamera;
     private bool isJumping = false;
     private bool waiteStopFall = false;
     GameObject WaitConnection;
+    private String currentGameState;
+    private String currentSensortate;
+    private String sensorState;
+    private String gameState;
+
     private static SC_gameControl instance;
     public static SC_gameControl Instance
     {
@@ -61,11 +70,10 @@ public class SC_gameControl : MonoBehaviour
         // connectServerPage
         connectedPage = GameObject.Find("connectServerPage");
         connectedPage_btnTryAgin = GameObject.Find("btn_connectServerAgin");
-        connectedPage_btnTryAgin.SetActive(false);
         connectedPage_txtStatusConnection = GameObject.Find("txr_resultConnectServer");
         // end connectServerPage
         // inputTestCodePage
-        inputPage = GameObject.Find("inputTestCodePage");
+        inputPage = GameObject.Find("inputTestCodePanel");
         txt_btn_submit_or_startGame = GameObject.Find("txt_btn_submit_or_startGame");
         InputField_codeTest = GameObject.Find("InputField_codeTest");
         txt_status_input_code = GameObject.Find("txt_status_input_code");
@@ -79,21 +87,59 @@ public class SC_gameControl : MonoBehaviour
     }
     void Update()
     {
-        if (SC_State.Instance.getState() == SC_State.GM_STATE.INIT) {
-            btn_call_back_connectedPage_txtStatusConnection();
-        }
-        if (SC_State.Instance.getState() == SC_State.GM_STATE.SENSOR_READY)
+        
+        sensorState = SC_State.Instance.getStateSn().ToString();
+        gameState = SC_State.Instance.getState().ToString();
+        if(sensorState != currentSensortate || gameState != currentGameState )
         {
-            WaitConnection.SetActive(false);
-            SC_State.Instance.setState(SC_State.GM_STATE.RUNNING);
+            Debug.Log(gameState);
+            Debug.Log(sensorState);
+            currentSensortate = sensorState;
+            currentGameState = gameState;
 
         }
+   
+        
+        if (SC_State.Instance.getState() == SC_State.GM_STATE.INIT) {
+            
+            btn_call_back_connectedPage_txtStatusConnection();
+        }
+
+        if (SC_State.Instance.getState() == SC_State.GM_STATE.WAIT_SENSOR)
+        {
+            if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.FAIL_CONNECT_SENSOR && !TryAgain_connect_sensor.activeSelf)
+            {
+                txt_wait_sensor_connection.GetComponent<Text>().text = "Faile to connection the sensor";
+                TryAgain_connect_sensor.SetActive(true);
+            }
+            if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.SECSSES_CONNECT_SENSOR)
+            {
+                SC_State.Instance.setStateSn(SC_State.SN_STATE.INIT_ATTENSION);
+            }
+            if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.SENSOR_READY)
+            {
+                SC_State.Instance.setStateSn(SC_State.SN_STATE.READ_ATTENSION);
+                WaitConnection.SetActive(false);
+                CanvaSensorConnection.SetActive(false);
+                inputPage.SetActive(false);
+                start_the_game();
+                SC_State.Instance.setState(SC_State.GM_STATE.RUNNING);
+            }
+
+        }
+
+        if (SC_State.Instance.getState() == SC_State.GM_STATE.END)
+        {
+            SC_State.Instance.setStateSn(SC_State.SN_STATE.STOP_SENSOR);
+        }
+      
 
         if (SC_State.Instance.getState() == SC_State.GM_STATE.RUNNING)
         {
            
+            
             SC_player.Instance.setGravity();
-            if (Input.GetKeyDown(KeyCode.Space) && SC_player.Instance.check_is_ground())
+            if (Input.GetMouseButtonDown(0) && SC_player.Instance.check_is_ground())
             {
               
                
@@ -138,7 +184,11 @@ public class SC_gameControl : MonoBehaviour
 
     }
     public void btn_tryConnection() {
-        SC_DLL.Instance.btn_tryConnectionDLL();
+        
+        TryAgain_connect_sensor.SetActive(false);
+        txt_wait_sensor_connection.GetComponent<Text>().text = "Wait for sensor connection";
+
+        SC_State.Instance.setStateSn(SC_State.SN_STATE.START_CONNECT_SENSOR);
     }
     public void btn_call_back_connectedPage_txtStatusConnection()
     {
@@ -188,25 +238,46 @@ public class SC_gameControl : MonoBehaviour
         }
         else
         {
+          
             gamePage.SetActive(true);
-            start_the_game();
-            inputPage.SetActive(false);
+
+            move_to_connect_sensor_step();
+          
 
 
         }
     }
+    void move_to_connect_sensor_step() 
+    {
 
-    void start_the_game() {
-        WaitConnection = GameObject.Find("WaitConnection");
+        
+       
         SC_SliderControl.Instance.Start_SC_SliderControl();
-        SC_player.Instance.Start_player();
-        SC_DLL.Instance.dll_start();
-        SC_State.Instance.setState(SC_State.GM_STATE.WAIT_SENSOR);
-        theCamera.GetComponent<SC_FollowCamera>().Start_SC_FollowCamera();
         CanvaGameOver = GameObject.Find("CanvaGameOver");
         CanvaGameOver.SetActive(false);
+        CanvaSensorConnection = GameObject.Find("DialogConnectionAndInitSensor");
+        WaitConnection = GameObject.Find("WaitConnection");
+        TryAgain_connect_sensor = GameObject.Find("btn_tryConnection");
+        txt_wait_sensor_connection = GameObject.Find("txt_wait_sensor_connection");
+        TryAgain_connect_sensor.SetActive(false);
+       
+        SC_State.Instance.setStateSn(SC_State.SN_STATE.START_CONNECT_SENSOR);
 
-            
+    }
+    void start_the_game() {
+        theCamera.GetComponent<SC_FollowCamera>().Start_SC_FollowCamera();
+        SC_player.Instance.Start_player();
+        theCamera.GetComponent<SC_FollowCamera>().Start_SC_FollowCamera();
+        // WaitConnection = GameObject.Find("WaitConnection");
+        //SC_SliderControl.Instance.Start_SC_SliderControl();
+        //SC_player.Instance.Start_player();
+        //SC_DLL.Instance.dll_start();
+        //SC_State.Instance.setState(SC_State.GM_STATE.WAIT_SENSOR);
+        //theCamera.GetComponent<SC_FollowCamera>().Start_SC_FollowCamera();
+        //CanvaGameOver = GameObject.Find("CanvaGameOver");
+        //CanvaGameOver.SetActive(false);
+
+
     }
     public void end_session() {
         CanvaGameOver.SetActive(true);

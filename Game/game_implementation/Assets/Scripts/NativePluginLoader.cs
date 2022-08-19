@@ -1,9 +1,3 @@
-// LICENSE
-//  See end of file for license information.
-//
-// AUTHOR
-//   Forrest Smith
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -231,7 +225,7 @@ namespace fts
         // Methods
         public PluginFunctionAttr(string functionName)
         {
-            Debug.Log("dsssssssssss");
+          
             this.functionName = functionName;
         }
     }

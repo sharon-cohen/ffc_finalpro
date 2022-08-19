@@ -68,7 +68,7 @@ public class SC_database : MonoBehaviour
                 return true;
             }
         }
-        // false
+        
         return false;
     }
     public bool check_time_test()
@@ -85,12 +85,12 @@ public class SC_database : MonoBehaviour
                 return true;
             }
             else {
-                // false
+              
                 return false;
             }
         }
         else {
-            // false
+         
             return false;
         }
         
@@ -100,18 +100,23 @@ public class SC_database : MonoBehaviour
     void set_log_sensor() { }
     void set_log_game() { }
     public void save_sensor_log(List<string> sensorLog) {
+        
         Debug.Log("log save sensor");
         IMongoCollection<Users> userCollection = db.GetCollection<Users>("tests");
         userCollection.UpdateMany(user => user.code == _code, Builders<Users>.Update.Set(user => user.sensorLog, sensorLog));
         Debug.Log("log save sensor finish");
-        return;
+           
+    return;
     }
     public void save_game_log(List<string> gameLog)
     {
-        Debug.Log("log save game");
-        IMongoCollection<Users> userCollection = db.GetCollection<Users>("tests");
-        userCollection.UpdateMany(user => user.code == _code, Builders<Users>.Update.Set(user => user.gameLog, gameLog));
-        Debug.Log("log save game finish");
+        
+       Debug.Log("log save game");
+       IMongoCollection<Users> userCollection = db.GetCollection<Users>("tests");
+       userCollection.UpdateMany(user => user.code == _code, Builders<Users>.Update.Set(user => user.gameLog, gameLog));
+       Debug.Log("log save game finish");
+
+       
         return;
     }
 

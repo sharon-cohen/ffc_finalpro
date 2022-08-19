@@ -27,9 +27,13 @@ public class SC_sensor : MonoBehaviour
 {
     string dateNow = DateTime.Now.ToString();
     List<string> sensorLog;
-    public GameObject at_txt;
-    // Update is called once per frame
-
+   
+    private float time = 0.0f;
+    public float interpolationPeriod = 4.0f;
+    int rnage = 0;
+    int tryc = 0;
+    int demo = 0;
+   
     private static SC_sensor instance;
     public static SC_sensor Instance
     {
@@ -46,42 +50,79 @@ public class SC_sensor : MonoBehaviour
     }
     void FixedUpdate()
     {
-        at_txt.GetComponent<Text>().text = "update: ";
+     
         if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.START_CONNECT_SENSOR) {
+            Debug.Log("dds");
+            SC_State.Instance.setState(SC_State.GM_STATE.WAIT_SENSOR);
             SC_State.Instance.setStateSn(SC_State.SN_STATE.WHIL_CONNECT_SENSOR);
+
             sensorLog.Clear();
             int res = FooPluginAPI_Auto.sensorConnect();
-            Debug.Log("connction is seccsees " + res.ToString());
-            if (res == 1)
+            //if (tryc == 1) 
+            //{
+                //res = 0;
+                //demo = ;
+            //}
+               
+            if (res == 0)
+            {
                 SC_State.Instance.setStateSn(SC_State.SN_STATE.SECSSES_CONNECT_SENSOR);
+                Debug.Log("connction is seccsees " + res.ToString());
+                
+            }
+
             else
+
+            {
                 SC_State.Instance.setStateSn(SC_State.SN_STATE.FAIL_CONNECT_SENSOR);
+
+                Debug.Log("connction is faile " + res.ToString());
+                tryc = 1;
+
+            }
+           
 
         }
         if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.INIT_ATTENSION)
         {
-            at_txt.GetComponent<Text>().text = "INIT_ATTENSION: "; ;
-            string date = DateTime.Now.ToString();
-            int at = FooPluginAPI_Auto.get_Atteintion();
-            Debug.Log( "INFO [SN] Attention: " + at.ToString());
-            at_txt.GetComponent<Text>().text = date+"INFO [SN] Attention: " + at.ToString();
-            if (at != 0) {
+
+            if (demo == 0)
+            {
+
+                string date = DateTime.Now.ToString();
+                int at = FooPluginAPI_Auto.get_Atteintion();
+               
+
+                Debug.Log("INFO [SN] Attention: " + at.ToString());
+
+                
+                if (at != 0)
+                {
+                    SC_State.Instance.setStateSn(SC_State.SN_STATE.SENSOR_READY);
+                }
+                time += Time.deltaTime;
+            }
+            else 
+            {
                 SC_State.Instance.setStateSn(SC_State.SN_STATE.SENSOR_READY);
             }
+           
         }
         if (SC_State.Instance.getStateSn() == SC_State.SN_STATE.READ_ATTENSION)
         {
-            at_txt.GetComponent<Text>().text = "READ_ATTENSION: " ;
-            int at = FooPluginAPI_Auto.get_Atteintion();
-            at_txt.GetComponent<Text>().text = "INFO [SN] Attention: " + at.ToString();
-            string date = DateTime.Now.ToString();
-            if (date != dateNow)
-
+          
+            if (demo == 0)
             {
-                Debug.Log(date + "INFO [SN] Attention: " + at.ToString());
-                sensorLog.Add(date + "INFO [SN] Attention: " + at.ToString());
-                at_txt.GetComponent<Text>().text = "INFO [SN] Attention: " + at.ToString();
-                dateNow = date;
+                int at = FooPluginAPI_Auto.get_Atteintion();
+
+                string date = DateTime.Now.ToString();
+                if (date != dateNow)
+
+                {
+                    Debug.Log(date + "INFO [SN] Attention: " + at.ToString());
+                    sensorLog.Add(date + "INFO [SN] Attention: " + at.ToString());
+                    dateNow = date;
+                }
             }
 
         }
@@ -90,6 +131,7 @@ public class SC_sensor : MonoBehaviour
     }
 
     public void disconnect_sensor() {
+       if (demo == 0)
         Debug.Log("disconnected " + FooPluginAPI_Auto.sensorDisconnect().ToString());
     }
 
