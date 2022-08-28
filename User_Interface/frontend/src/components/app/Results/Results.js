@@ -1,154 +1,378 @@
-import React, { useEffect, useState } from "react";import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import pic1 from './1.jpg';
-import pic2 from './2.jpg';
-import pic3 from './3.jpg';
-import pic4 from './4.jpg';
-import pic5 from './5.jpg';
-import pic6 from './6.jpg';
-import pic7 from './7.jpg';
-import pic8 from './8.jpg';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  BarChart,
+  Bar,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Sector,
+  Cell,
+} from "recharts";
+const styles = {
+  fontFamily: "sans-serif",
+  textAlign: "center",
+};
 
+const Results = () => {
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-function Results() {
   const { state } = useLocation();
-  const [sensorLogSec, setsensorLogSec] = useState([]);
-  // useEffect(() => {
-  //   const firstRowSensorLog = state.sensorLog[0]
-  //   const lestRowSensorLog = state.sensorLog[state.sensorLog.length-1]
-  //   console.log(firstRowSensorLog);   
-  //   console.log(lestRowSensorLog);   
-  //   const firtTime = firstRowSensorLog.split(" ")[1];
-  //   const lestTime = lestRowSensorLog.split(" ")[1];
-  //   const firtTimeSec = parseInt(firtTime.split(":")[2]);
-  //   const lestTimeSec = parseInt(lestTime.split(":")[2]);
-  //   const firtTimeMin = parseInt(firtTime.split(":")[1]);
-  //   const lestTimeMin = parseInt(lestTime.split(":")[1]);
-  //   const totalFirstSec = firtTimeMin * 60 +firtTimeSec
-  //   const totalLasttSec = lestTimeMin * 60 +lestTimeSec
-  //   const totalGameTimeSec = totalLasttSec -totalFirstSec
-  //   let map1 = new Map();
-  //   let map1TimePlatform = new Map();
-  //   let map1TimeResultJump = new Map();
-  //   let platformSequnce = []
-    
-  //   for(let i = 0; i < state.gameLog.length; i++){
-  //       console.log(state.gameLog[i])
-  //     if (state.gameLog[i].includes("Platform")){
-  //         if (!platformSequnce.includes(state.gameLog[i].split(" ")[3]))  
-  //               platformSequnce.push(state.gameLog[i].split(" ")[3])
-  //       let time = state.gameLog[i].split(" ")[1];  
-  //       if (!map1TimePlatform.has(time)){
-  //         map1TimePlatform.set(time,state.gameLog[i].split(" ")[3])
-  //     }
-      
-  //   }
-  //   if (state.gameLog[i].includes("SUCCESS") || state.gameLog[i].includes("FAIL") ){
-  //     let time = state.gameLog[i].split(" ")[1];  
-  //     if (!map1TimeResultJump.has(time)){
-  //       map1TimeResultJump.set(time,state.gameLog[i].split(" ")[6])
-  //     }
-  //   }
-  //   }
-    
-   
-  //   for(let i = 0; i <= totalGameTimeSec; i++){
-  //     map1.set(i,"")
-  //   }
-  //   for(let i = 0; i < state.sensorLog.length; i++){
-  //     let sensorLogSplit = state.sensorLog[i].split(" ");
-  //     let time = sensorLogSplit[1];
-  //     let timeSplite = time.split(":");
-  //     let sec = parseInt(timeSplite[2])
-  //     let min = parseInt(timeSplite[1])
-  //     const totaltime = min * 60 + sec
-  //     const finalTime = totaltime - totalFirstSec
-      
-  //     if (map1TimePlatform.has(time) && map1TimeResultJump.has(time))
-  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":map1TimePlatform.get(time),"resultJump":map1TimeResultJump.get(time)}) 
-  //     if (!map1TimePlatform.has(time) && map1TimeResultJump.has(time))
-  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":"none","resultJump":map1TimeResultJump.get(time)}) 
-  //     if (map1TimePlatform.has(time) && !map1TimeResultJump.has(time))
-  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":map1TimePlatform.get(time),"resultJump":"none"}) 
-  //     if (!map1TimePlatform.has(time) && !map1TimeResultJump.has(time))
-  //       map1.set(finalTime, {"time":time,"attention":sensorLogSplit[5],"platform":"none","resultJump":"none"}) 
-  //   }
-   
-  //  // fix secsses
-  //  for (var [key, value] of map1.entries()) {
-    
-  //   if (value["resultJump"] == "SUCCESS" && value["platform"] != "none"){
-  //       const platform =  value["platform"]
-  //       console.log(platform)
-  //       // console.log(platformSequnce)
-  //       const index = platformSequnce.indexOf(platform)
-  //       const theRealPlatyform = platformSequnce[index-1]
-  //       let theKey = 0
-  //       for (var [key1, value1] of map1.entries()){
-  //           if (value1["platform"] == theRealPlatyform){
-  //               theKey = key1
-  //           }
-  //       }
-  //         let valueChnage = map1.get(theKey)
-  //         valueChnage["resultJump"] = "SUCCESS"
-  //         map1.set(theKey,valueChnage)
-  //         let deleteRes = map1.get(key)
-  //         deleteRes["resultJump"] = "none"
-  //    }
-   
-  //   }
-  //   console.log(map1);   
- 
-    
+  const [sensorLogSec, setsensorLogSec] = useState(null);
+  const [hello, sethello] = useState("sdsd");
+  function list_of_type_time_to_sec(ListTypeTime) {
+    let secClculate =
+      parseInt(ListTypeTime[0]) * 3600 +
+      parseInt(ListTypeTime[1]) * 60 +
+      parseInt(ListTypeTime[2]);
+    return secClculate;
+  }
+  function splite_timeFormat(strTime) {
+    let hour = strTime.split(":")[0];
+    let min = strTime.split(":")[1];
+    let sec = strTime.split(":")[2];
+    return [hour, min, sec];
+  }
+  function timeFormat_to_long_int(strTime, totalFirstSec) {
+    let splite_type_time = splite_timeFormat(strTime);
+    let convertSec = list_of_type_time_to_sec(splite_type_time);
+    return convertSec - totalFirstSec;
+  }
+  function get_list_of_number_from_string(strWithNumber) {
+    const result = strWithNumber.match(/\d+/gi).map(Number);
+    return result;
+  }
+  function number_To_level(number) {
+    if (number > 12) {
+      return "high";
+    }
+    if (number > 6) {
+      return "middle";
+    }
+    if (number > 0) {
+      return "low";
+    }
+  }
+  function platform_to_level(strPlatform) {
+    let listOfNumberString = get_list_of_number_from_string(strPlatform);
+    let platformNumber = listOfNumberString[0];
+    return number_To_level(platformNumber);
+  }
+  function attentionVsTimeChart() {
+    const data = [];
 
-    
-  // });
+    for (var [key, value] of sensorLogSec.entries()) {
+      const strCopy = sensorLogSec.get(key).split(",");
+      const v = key.value;
+      for (const x of strCopy) {
+        const atten = x.split(":");
+        if (atten[0] == "attention") {
+          let d = {
+            year: key,
+            value: atten[1],
+          };
+          data.push(d);
+          console.log(d);
+        }
+      }
+    }
+    return data;
+  }
+  function levelVsAttChart() {
+    const data = [];
 
-  console.log(state, "THIS_IS_THE_PROJECT");
-  return (
-    <div className="container">
-      <h1>TEST GRAPHS</h1>
-      {/* <select onchange="func(this.value)">
-        <option disabled selected>choose graph</option>
-        <option value="FallVsSuccess.html">Falls VS successes in the game</option>
-        <option value="AttentionLevel.html">Attention level * time</option>
-        <option value="distanceGap.html">Response distance gap * time</option>
-        <option value="distanceGapLevel.html">Response distance gap * Beam difficulty level</option>
-        <option value="randomJump.html">The amount of random jumps out of the total jumps</option>
-        <option value="AttentionLevelDiffLevel.html">Time * Attention level * Level of difficulty in the game </option>
-        <option value="AttentionLevelJumpRes.html">Time * Attention level * Jump result </option>
-        <option value="AttentionLevelResTime.html">Time * Attention level * Response time in the game </option>
-      </select> */}
-      <div>
-      <div>
-        <h3>Falls VS successes in the game</h3>
-        <img src={pic1} alt="Fall VS Successe"/>
-      </div>
-      <div>
-        <h3>Attention level * time</h3>
-        <img src={pic2} alt="Fall VS Successe"/>
-      </div>      <div>
-        <h3>Response distance gap * time</h3>
-        <img src={pic3} alt="Fall VS Successe"/>
-      </div>      <div>
-        <h3>Response distance gap * Beam difficulty level</h3>
-        <img src={pic4} alt="Fall VS Successe"/>
-      </div>      <div>
-        <h3>The amount of random jumps out of the total jumps</h3>
-        <img src={pic5} alt="Fall VS Successe"/>
-      </div>      <div>
-        <h3>Time * Attention level * Level of difficulty in the game</h3>
-        <img src={pic6} alt="Fall VS Successe"/>
-      </div>      <div>
-        <h3>Time * Attention level * Jump result</h3>
-        <img src={pic7} alt="Fall VS Successe"/>
-      </div>      <div>
-        <h3>Time * Attention level * Response time in the game</h3>
-        <img src={pic8} alt="Fall VS Successe"/>
-      </div>
-      </div>
-      </div>
+    for (var [key, value] of sensorLogSec.entries()) {
+      const strCopy = sensorLogSec.get(key).split(",");
+      const v = key.value;
+      let att = 0;
+      let l = 0;
+      for (const x of strCopy) {
+        const lev = x.split(":");
+        if (lev[0] == "attention") {
+          att = lev[1];
+          let d = {
+            name: att,
+            level: l,
+          };
+          data.push(d);
+          console.log(d);
+        }
+        if (lev[0] == "level") {
+          if (lev[1] == "low") {
+            l = 1;
+          }
+          if (lev[1] == "high") {
+            l = 3;
+          }
+          if (lev[1] == "middle") {
+            l = 2;
+          }
+        }
+      }
+    }
+    return data;
+  }
+  function levelVsTimeChart() {
+    const data = [];
+
+    for (var [key, value] of sensorLogSec.entries()) {
+      const strCopy = sensorLogSec.get(key).split(",");
+      const v = key.value;
+      for (const x of strCopy) {
+        const lev = x.split(":");
+        if (lev[0] == "level") {
+          let l = 100;
+          if (lev[1] == "low") {
+            l = 1;
+          }
+          if (lev[1] == "high") {
+            l = 3;
+          }
+          if (lev[1] == "middle") {
+            l = 2;
+          }
+          let d = {
+            name: key,
+            level: l,
+          };
+          data.push(d);
+          console.log(d);
+        }
+      }
+    }
+    return data;
+  }
+  function resultJumpData() {
+    let falls = 0;
+    let success = 0;
+    for (var [key, value] of sensorLogSec.entries()) {
+      const strCopy = sensorLogSec.get(key).split(",");
+      const v = key.value;
+      for (const x of strCopy) {
+        const atten = x.split(":");
+        if (atten[0] == "theResult") {
+          console.log("dsdsdsdsd");
+          if (atten[1].includes("SUCCESS")) {
+            success = success + 1;
+          }
+          if (atten[1].includes("FAIL")) {
+            falls = falls + 1;
+          }
+        }
+      }
+    }
+    const data = [
+      { name: "falls", value: falls },
+      { name: "success", value: success },
+    ];
+    console.log(data);
+    return data;
+  }
+  useEffect(() => {
+    const firstRowSensorLog = state.sensorLog[0];
+    const lestRowSensorLog = state.sensorLog[state.sensorLog.length - 1];
+    console.log(firstRowSensorLog);
+    console.log(lestRowSensorLog);
+
+    let firtTime = firstRowSensorLog.split(" ")[1];
+    const lestTime = lestRowSensorLog.split(" ")[1];
+    firtTime = firtTime.replaceAll(" ", "");
+    const firtTimeSec = parseInt(firtTime.split(":")[2]);
+    const lestTimeSec = parseInt(lestTime.split(":")[2]);
+    const firtTimeMin = parseInt(firtTime.split(":")[1]);
+    const lestTimeMin = parseInt(lestTime.split(":")[1]);
+    const firtTimeHour = parseInt(firtTime.split(":")[0]);
+    const lestTimeHour = parseInt(lestTime.split(":")[0]);
+
+    const totalFirstSec =
+      firtTimeMin * 60 + firtTimeSec + firtTimeHour * 60 * 60;
+    const totalLasttSec =
+      lestTimeMin * 60 + lestTimeSec + lestTimeHour * 60 * 60;
+    const totalGameTimeSec = totalLasttSec - totalFirstSec;
+    let newGameLog = [];
+    let waitForRes = false;
+    let indexNewGameLog = 0;
+    let j = 0;
+    console.log("==================================================");
+    for (let i = 0; i < state.gameLog.length; i++)
+      console.log(state.gameLog[i]);
+
+    console.log("==================================================");
+    for (let i = 0; i < state.gameLog.length; i++) {
+      if (state.gameLog[i].includes("distance") && waitForRes) {
+        newGameLog[indexNewGameLog] =
+          newGameLog[indexNewGameLog] + ",theResult : randomJump";
+        waitForRes = false;
+      }
+      if (state.gameLog[i].includes("distance") && !waitForRes) {
+        waitForRes = true;
+        newGameLog.push(state.gameLog[i]);
+
+        indexNewGameLog = j;
+        j = j + 1;
+      }
+      if (state.gameLog[i].includes("ResultJump") && waitForRes) {
+        if (state.gameLog[i].includes("SUCCESS"))
+          newGameLog[indexNewGameLog] =
+            newGameLog[indexNewGameLog] + ",theResult : SUCCESS";
+        if (state.gameLog[i].includes("FAIL"))
+          newGameLog[indexNewGameLog] =
+            newGameLog[indexNewGameLog] + ",theResult : FAIL";
+        waitForRes = false;
+      }
+      if (
+        !state.gameLog[i].includes("ResultJump") &&
+        !state.gameLog[i].includes("distance")
+      ) {
+        newGameLog.push(state.gameLog[i]);
+        j = j + 1;
+      }
+    }
+
+    let map1TimejumpData = new Map();
+    let lastPlatform = " ";
+    for (let i = 0; i < newGameLog.length; i++) {
+      if (newGameLog[i].includes("Platform")) {
+        lastPlatform = newGameLog[i].split(" ")[3];
+      }
+
+      if (
+        newGameLog[i].includes("distance") &&
+        newGameLog[i].includes("theResult") &&
+        newGameLog[i].includes("Jump")
+      ) {
+        newGameLog[i] =
+          newGameLog[i] +
+          ",platform : " +
+          lastPlatform +
+          ",level : " +
+          platform_to_level(lastPlatform);
+        console.log(newGameLog[i].split(" ")[1]);
+        let keyNoSpace = String(newGameLog[i].split(" ")[1]);
+        keyNoSpace = keyNoSpace.replaceAll(" ", "");
+        map1TimejumpData.set(keyNoSpace, newGameLog[i]);
+      }
+    }
+
+    console.log("-----------------------------------------------------------");
+
+    let mapTwoLogs = new Map();
+    for (let i = 0; i < state.sensorLog.length; i++) {
+      let time = state.sensorLog[i].split(" ")[1];
+      let keyNoSpace = String(time);
+      keyNoSpace = keyNoSpace.replaceAll(" ", "");
+      if (!map1TimejumpData.has(keyNoSpace)) {
+        mapTwoLogs.set(
+          keyNoSpace,
+          "action:running,attention:" + state.sensorLog[i].split(" ")[5]
+        );
+      } else {
+        let indexOfDistance = String(map1TimejumpData.get(keyNoSpace)).indexOf(
+          "distance"
+        );
+        let strAfterDistance = String(
+          map1TimejumpData.get(keyNoSpace)
+        ).substring(indexOfDistance);
+        let detailOFGameNoSpace = strAfterDistance.replaceAll(" ", "");
+        let detailOFGameNoSpace_Acction_Attention =
+          "action:jump," +
+          detailOFGameNoSpace +
+          ",attention:" +
+          state.sensorLog[i].split(" ")[5];
+        mapTwoLogs.set(keyNoSpace, detailOFGameNoSpace_Acction_Attention);
+      }
+    }
+
+    let finalMap = new Map();
+    for (var [key, value] of mapTwoLogs.entries()) {
+      let timeLongInt = timeFormat_to_long_int(key, totalFirstSec);
+      finalMap.set(timeLongInt, value + ",timeFormat:" + key);
+    }
+    for (var [key, value] of finalMap.entries()) {
+      console.log("key - ", key);
+      console.log("value - ", value);
+    }
+
+    setsensorLogSec(finalMap);
+  }, []);
+  return sensorLogSec ? (
+    <div style={styles}>
+      <div style={styles}>attention vs time</div>
+      <LineChart
+        width={500}
+        height={300}
+        data={attentionVsTimeChart()}
+        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+      >
+        <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false} />
+        <XAxis dataKey="year" />
+        <YAxis />
+      </LineChart>
+      <div>level vs time</div>
+      <BarChart
+        width={500}
+        height={300}
+        data={levelVsTimeChart()}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="level" fill="#8884d8" />
+      </BarChart>
+      <div>level vs attention</div>
+      <BarChart
+        width={500}
+        height={300}
+        data={levelVsAttChart()}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="level" fill="#8884d8" />
+      </BarChart>
+      <div>Success vs Fail</div>
+
+      <PieChart width={400} height={400}>
+        <Pie
+          dataKey="value"
+          startAngle={180}
+          endAngle={0}
+          data={resultJumpData()}
+          cx="50%"
+          cy="50%"
+          outerRadius={80}
+          fill="#8884d8"
+          label
+        />
+      </PieChart>
+    </div>
+  ) : (
+    <div>loading</div>
   );
-}
+};
 
 export default Results;
